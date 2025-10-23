@@ -28,28 +28,27 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Premium Dark CSS - Exact match to reference
+# Clean Uniform CSS
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap');
     
     * {
-        font-family: 'Inter', -apple-system, sans-serif;
+        font-family: 'Sora', sans-serif;
     }
     
-    /* Force dark theme */
+    /* Main background */
     .stApp {
-        background-color: #0f1419 !important;
+        background: linear-gradient(135deg, #e0f2fe 0%, #ddd6fe 100%);
     }
     
     .main {
-        background-color: #0f1419 !important;
+        background: transparent;
     }
     
     .block-container {
-        max-width: 700px;
-        padding: 2rem 1rem;
-        background-color: #0f1419 !important;
+        max-width: 750px;
+        padding: 2.5rem 1rem;
     }
     
     /* Hide Streamlit elements */
@@ -57,42 +56,43 @@ st.markdown("""
     
     /* Header */
     .premium-header {
-        font-size: 3.5rem;
-        font-weight: 700;
-        color: #5eead4;
+        font-size: 3rem;
+        font-weight: 800;
+        color: #1e3a5f;
         text-align: center;
-        margin: 2rem 0 2.5rem 0;
+        margin: 0 0 2.5rem 0;
         letter-spacing: -0.02em;
     }
     
-    /* Upload cards */
-    .upload-card {
-        background: #f5f5f5;
-        border-radius: 24px;
-        padding: 2rem 2rem 2.5rem 2rem;
-        margin-bottom: 1.5rem;
+    /* Upload sections */
+    .upload-section {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        margin-bottom: 1.25rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     }
     
-    .card-label {
+    .section-title {
         font-size: 1.125rem;
-        font-weight: 600;
-        color: #1a1a1a;
-        margin-bottom: 1rem;
+        font-weight: 700;
+        color: #1e3a5f;
+        margin-bottom: 1.25rem;
         display: block;
     }
     
-    /* File uploader */
+    /* File uploader unified background */
     [data-testid="stFileUploader"] {
-        background: #2a2e35 !important;
-        border: 2px dashed #4a5568;
+        background: white !important;
+        border: 2px dashed #cbd5e1;
         border-radius: 16px;
         padding: 2.5rem 2rem;
         transition: all 0.3s ease;
     }
     
     [data-testid="stFileUploader"]:hover {
-        border-color: #718096;
-        background: #3a3f47 !important;
+        border-color: #22d3ee;
+        background: #f0fdff !important;
     }
     
     [data-testid="stFileUploader"] section {
@@ -109,41 +109,32 @@ st.markdown("""
         display: none !important;
     }
     
-    [data-testid="stFileUploader"] [data-testid="stMarkdownContainer"] {
-        color: #e0e0e0 !important;
-    }
-    
     .upload-text {
-        color: #e0e0e0;
-        font-size: 1.125rem;
+        color: #64748b;
+        font-size: 1rem;
         font-weight: 500;
         text-align: center;
         margin-bottom: 0.75rem;
     }
     
-    .upload-subtext {
-        color: #9ca3af;
-        font-size: 0.875rem;
-        text-align: center;
-        margin-bottom: 1.5rem;
-    }
-    
-    /* Browse button inside uploader */
+    /* Browse button */
     [data-testid="stFileUploader"] button {
-        background: #2a2e35 !important;
-        color: #e0e0e0 !important;
-        border: 1px solid #4a5568 !important;
+        background: #22d3ee !important;
+        color: white !important;
+        border: none !important;
         border-radius: 10px !important;
         padding: 0.75rem 2rem !important;
-        font-weight: 600 !important;
+        font-weight: 700 !important;
         font-size: 0.95rem !important;
         margin: 0 auto !important;
         display: block !important;
+        transition: all 0.3s ease !important;
     }
     
     [data-testid="stFileUploader"] button:hover {
-        background: #3a3f47 !important;
-        border-color: #718096 !important;
+        background: #06b6d4 !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(34, 211, 238, 0.4);
     }
     
     /* Select boxes */
@@ -152,189 +143,209 @@ st.markdown("""
     }
     
     .stSelectbox label, .stMultiSelect label {
-        font-size: 1rem;
+        font-size: 0.95rem;
         font-weight: 600;
-        color: #e0e0e0;
+        color: #1e3a5f;
         margin-bottom: 0.5rem;
     }
     
     [data-baseweb="select"] > div {
-        background-color: #2a2e35 !important;
-        border-color: #4a5568 !important;
-        color: #e0e0e0 !important;
-        border-radius: 10px !important;
+        background-color: white !important;
+        border: 2px solid #e2e8f0 !important;
+        border-radius: 12px !important;
+        color: #1e3a5f !important;
     }
     
-    [data-baseweb="select"] input {
-        color: #e0e0e0 !important;
-    }
-    
-    [data-baseweb="select"] svg {
-        fill: #9ca3af !important;
+    [data-baseweb="select"] > div:hover {
+        border-color: #22d3ee !important;
     }
     
     /* Match button */
     .stButton > button {
         width: 100%;
-        background: #5eead4 !important;
-        color: #0f1419 !important;
+        background: #22d3ee !important;
+        color: white !important;
         border: none !important;
         padding: 1rem 2rem !important;
-        font-size: 1rem !important;
-        font-weight: 700 !important;
-        border-radius: 12px !important;
+        font-size: 1.05rem !important;
+        font-weight: 800 !important;
+        border-radius: 14px !important;
         cursor: pointer;
         transition: all 0.3s ease;
         margin-top: 1.5rem;
+        box-shadow: 0 6px 20px rgba(34, 211, 238, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
     }
     
     .stButton > button:hover {
-        background: #2dd4bf !important;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(94, 234, 212, 0.3);
+        background: #06b6d4 !important;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(34, 211, 238, 0.5);
     }
     
     /* Download buttons */
     .stDownloadButton > button {
-        background: #22c55e !important;
+        background: #10b981 !important;
         color: white !important;
         border: none !important;
-        font-weight: 600 !important;
+        font-weight: 700 !important;
         padding: 0.875rem 2rem !important;
         border-radius: 12px !important;
         transition: all 0.3s ease;
         width: 100%;
+        box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
     }
     
     .stDownloadButton > button:hover {
-        background: #16a34a !important;
+        background: #059669 !important;
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
+        box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+    }
+    
+    /* Results section */
+    .results-section {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        margin: 2rem 0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     }
     
     /* Metrics */
     [data-testid="stMetricValue"] {
         font-size: 2rem;
-        font-weight: 700;
-        color: #5eead4;
+        font-weight: 800;
+        color: #1e3a5f;
     }
     
     [data-testid="stMetricLabel"] {
         font-size: 0.75rem;
-        font-weight: 600;
-        color: #9ca3af;
+        font-weight: 700;
+        color: #64748b;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.08em;
     }
     
     .stMetric {
-        background: #1a1f26;
+        background: #f8fafc;
         padding: 1.25rem;
         border-radius: 14px;
-        border: 1px solid #2a2e35;
+        border: 2px solid #e2e8f0;
     }
     
     /* Progress bar */
     .stProgress > div > div {
-        background: linear-gradient(90deg, #5eead4 0%, #2dd4bf 100%);
+        background: linear-gradient(90deg, #22d3ee 0%, #06b6d4 100%);
         border-radius: 10px;
         height: 8px;
     }
     
     .stProgress > div {
-        background: #2a2e35;
+        background: #e2e8f0;
         border-radius: 10px;
     }
     
     /* Info section */
     .info-section {
-        background: #f5f5f5;
-        border-radius: 24px;
+        background: white;
+        border-radius: 20px;
         padding: 2rem;
         margin-top: 2rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     }
     
     .info-title {
-        font-size: 1rem;
-        font-weight: 700;
-        color: #1a1a1a;
+        font-size: 0.95rem;
+        font-weight: 800;
+        color: #1e3a5f;
         margin-bottom: 1.25rem;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.08em;
     }
     
     .match-types {
         display: grid;
-        gap: 1rem;
+        gap: 0.875rem;
     }
     
     .match-type {
-        background: #fafafa;
+        background: #f8fafc;
         padding: 1.5rem;
-        border-radius: 16px;
+        border-radius: 14px;
         text-align: center;
-        border: 1px solid #e5e5e5;
+        border: 2px solid #e2e8f0;
+        transition: all 0.3s ease;
+    }
+    
+    .match-type:hover {
+        border-color: #22d3ee;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(34, 211, 238, 0.2);
     }
     
     .match-type-name {
         font-size: 0.95rem;
-        font-weight: 700;
-        color: #1a1a1a;
+        font-weight: 800;
+        color: #1e3a5f;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.08em;
         margin-bottom: 0.5rem;
     }
     
     .match-type-desc {
         font-size: 0.875rem;
-        color: #737373;
+        color: #64748b;
         line-height: 1.5;
+        font-weight: 500;
     }
     
     /* Alerts */
     .stAlert {
-        border-radius: 12px;
-        background: #1a1f26;
-        border: 1px solid #2a2e35;
-        color: #e0e0e0;
+        border-radius: 14px;
+        background: white;
+        border: 2px solid #e2e8f0;
+        color: #1e3a5f;
+        font-weight: 600;
     }
     
     .stSuccess {
-        background: #14532d !important;
-        border-color: #16a34a !important;
-        color: #bbf7d0 !important;
+        background: #d1fae5 !important;
+        border-color: #10b981 !important;
+        color: #065f46 !important;
     }
     
     .stWarning {
-        background: #431407 !important;
-        border-color: #ea580c !important;
-        color: #fed7aa !important;
+        background: #fed7aa !important;
+        border-color: #f59e0b !important;
+        color: #78350f !important;
     }
     
     /* Expander */
     .streamlit-expanderHeader {
-        background: #1a1f26;
-        border-radius: 12px;
-        font-weight: 600;
-        color: #e0e0e0;
-        border: 1px solid #2a2e35;
+        background: white;
+        border-radius: 14px;
+        font-weight: 700;
+        color: #1e3a5f;
+        border: 2px solid #e2e8f0;
         padding: 1rem 1.25rem;
     }
     
     .streamlit-expanderHeader:hover {
-        background: #2a2e35;
-        border-color: #4a5568;
+        background: #f8fafc;
+        border-color: #22d3ee;
     }
     
     /* Dataframe */
     [data-testid="stDataFrame"] {
-        border-radius: 12px;
-        border: 1px solid #2a2e35;
+        border-radius: 14px;
+        border: 2px solid #e2e8f0;
+        overflow: hidden;
     }
     
-    /* Text color fixes */
-    p, span, div {
-        color: #e0e0e0;
+    /* Spinner */
+    .stSpinner > div {
+        border-top-color: #22d3ee !important;
     }
     
     /* Mobile responsive */
@@ -344,16 +355,16 @@ st.markdown("""
         }
         
         .premium-header {
-            font-size: 2.5rem;
-            margin: 1.5rem 0 2rem 0;
+            font-size: 2.25rem;
+            margin-bottom: 2rem;
         }
         
-        .upload-card {
+        .upload-section {
             padding: 1.5rem;
             margin-bottom: 1rem;
         }
         
-        .card-label {
+        .section-title {
             font-size: 1rem;
         }
         
@@ -361,7 +372,7 @@ st.markdown("""
             padding: 2rem 1.5rem;
         }
         
-        .info-section {
+        .info-section, .results-section {
             padding: 1.5rem;
         }
         
@@ -520,13 +531,13 @@ def process_matching(df1, df2, match_col1, match_col2, return_columns, progress_
 def main():
     st.markdown('<h1 class="premium-header">Match Data</h1>', unsafe_allow_html=True)
     
-    st.markdown('<div class="upload-card">', unsafe_allow_html=True)
-    st.markdown('<span class="card-label">Database File</span>', unsafe_allow_html=True)
+    st.markdown('<div class="upload-section">', unsafe_allow_html=True)
+    st.markdown('<span class="section-title">Database File</span>', unsafe_allow_html=True)
     file1 = st.file_uploader("db", type=['xlsx', 'xls'], label_visibility="collapsed", key="file1")
     st.markdown('</div>', unsafe_allow_html=True)
     
-    st.markdown('<div class="upload-card">', unsafe_allow_html=True)
-    st.markdown('<span class="card-label">Input File</span>', unsafe_allow_html=True)
+    st.markdown('<div class="upload-section">', unsafe_allow_html=True)
+    st.markdown('<span class="section-title">Input File</span>', unsafe_allow_html=True)
     file2 = st.file_uploader("input", type=['xlsx', 'xls'], label_visibility="collapsed", key="file2")
     st.markdown('</div>', unsafe_allow_html=True)
     
@@ -554,7 +565,7 @@ def main():
                 st.warning("Select at least one return column")
                 return
             
-            if st.button("Match", use_container_width=True):
+            if st.button("Run Match", use_container_width=True):
                 progress_bar = st.progress(0)
                 
                 try:
@@ -565,7 +576,9 @@ def main():
                     )
                     
                     progress_bar.empty()
-                    st.success("Done")
+                    st.success("✓ Matching Complete")
+                    
+                    st.markdown('<div class="results-section">', unsafe_allow_html=True)
                     
                     col1, col2, col3, col4, col5 = st.columns(5)
                     
@@ -579,6 +592,8 @@ def main():
                         st.metric("Fuzzy", len(results_df[results_df['Match Type'].isin(['Fuzzy', 'AI'])]))
                     with col5:
                         st.metric("None", len(results_df[results_df['Match Type'] == 'No Match']))
+                    
+                    st.markdown('</div>', unsafe_allow_html=True)
                     
                     with st.expander("View Results", expanded=True):
                         st.dataframe(results_df, use_container_width=True, height=400)
@@ -615,7 +630,7 @@ def main():
                 </div>
                 <div class="match-type">
                     <div class="match-type-name">TLD</div>
-                    <div class="match-type-desc">Same base, diff extension</div>
+                    <div class="match-type-desc">Same base, different extension</div>
                 </div>
                 <div class="match-type">
                     <div class="match-type-name">Fuzzy</div>
