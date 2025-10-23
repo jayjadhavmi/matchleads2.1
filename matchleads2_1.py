@@ -28,278 +28,345 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Premium CSS - Dark theme compatible
+# Premium Dark CSS - Exact match to reference
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
     
     * {
-        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-family: 'Inter', -apple-system, sans-serif;
+    }
+    
+    /* Force dark theme */
+    .stApp {
+        background-color: #0f1419 !important;
     }
     
     .main {
-        background: #2d3748;
+        background-color: #0f1419 !important;
     }
     
     .block-container {
-        max-width: 720px;
-        padding: 3rem 1rem 2rem 1rem;
+        max-width: 700px;
+        padding: 2rem 1rem;
+        background-color: #0f1419 !important;
     }
     
-    /* Hide default elements */
+    /* Hide Streamlit elements */
     #MainMenu, footer, header {visibility: hidden;}
     
     /* Header */
     .premium-header {
-        font-size: 2.5rem;
+        font-size: 3.5rem;
         font-weight: 700;
-        background: linear-gradient(135deg, #4fd1c5 0%, #63b3ed 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #5eead4;
         text-align: center;
-        margin-bottom: 1rem;
+        margin: 2rem 0 2.5rem 0;
         letter-spacing: -0.02em;
     }
     
-    .subtitle {
-        text-align: center;
-        color: #a0aec0;
-        font-size: 1rem;
-        margin-bottom: 3rem;
-        font-weight: 400;
+    /* Upload cards */
+    .upload-card {
+        background: #f5f5f5;
+        border-radius: 24px;
+        padding: 2rem 2rem 2.5rem 2rem;
+        margin-bottom: 1.5rem;
     }
     
-    /* Upload section */
-    .upload-container {
-        background: white;
-        border-radius: 24px;
-        padding: 2.5rem;
-        margin-bottom: 2rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        border: 1px solid #f0f0f0;
+    .card-label {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-bottom: 1rem;
+        display: block;
     }
     
     /* File uploader */
     [data-testid="stFileUploader"] {
-        background: #fafafa;
-        border: 2px dashed #e0e0e0;
+        background: #2a2e35 !important;
+        border: 2px dashed #4a5568;
         border-radius: 16px;
-        padding: 2rem 1.5rem;
-        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 2.5rem 2rem;
+        transition: all 0.3s ease;
     }
     
     [data-testid="stFileUploader"]:hover {
-        border-color: #0a0a0a;
-        background: #f5f5f5;
+        border-color: #718096;
+        background: #3a3f47 !important;
     }
     
     [data-testid="stFileUploader"] section {
-        border: none;
-        padding: 0;
+        border: none !important;
+        padding: 0 !important;
+        background: transparent !important;
     }
     
     [data-testid="stFileUploader"] section > div {
-        background: transparent;
+        background: transparent !important;
     }
     
-    /* Labels */
-    .stFileUploader label {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: #0a0a0a;
-        letter-spacing: -0.01em;
+    [data-testid="stFileUploader"] label {
+        display: none !important;
+    }
+    
+    [data-testid="stFileUploader"] [data-testid="stMarkdownContainer"] {
+        color: #e0e0e0 !important;
+    }
+    
+    .upload-text {
+        color: #e0e0e0;
+        font-size: 1.125rem;
+        font-weight: 500;
+        text-align: center;
+        margin-bottom: 0.75rem;
+    }
+    
+    .upload-subtext {
+        color: #9ca3af;
+        font-size: 0.875rem;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Browse button inside uploader */
+    [data-testid="stFileUploader"] button {
+        background: #2a2e35 !important;
+        color: #e0e0e0 !important;
+        border: 1px solid #4a5568 !important;
+        border-radius: 10px !important;
+        padding: 0.75rem 2rem !important;
+        font-weight: 600 !important;
+        font-size: 0.95rem !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+    
+    [data-testid="stFileUploader"] button:hover {
+        background: #3a3f47 !important;
+        border-color: #718096 !important;
     }
     
     /* Select boxes */
-    [data-baseweb="select"] {
-        border-radius: 12px;
+    .stSelectbox, .stMultiSelect {
+        margin-bottom: 1rem;
     }
     
     .stSelectbox label, .stMultiSelect label {
-        font-size: 0.875rem;
+        font-size: 1rem;
         font-weight: 600;
-        color: #0a0a0a;
+        color: #e0e0e0;
         margin-bottom: 0.5rem;
     }
     
-    /* Primary button */
+    [data-baseweb="select"] > div {
+        background-color: #2a2e35 !important;
+        border-color: #4a5568 !important;
+        color: #e0e0e0 !important;
+        border-radius: 10px !important;
+    }
+    
+    [data-baseweb="select"] input {
+        color: #e0e0e0 !important;
+    }
+    
+    [data-baseweb="select"] svg {
+        fill: #9ca3af !important;
+    }
+    
+    /* Match button */
     .stButton > button {
         width: 100%;
-        background: #0a0a0a;
-        color: white;
-        border: none;
-        padding: 1rem 2rem;
-        font-size: 0.95rem;
-        font-weight: 600;
-        border-radius: 14px;
+        background: #5eead4 !important;
+        color: #0f1419 !important;
+        border: none !important;
+        padding: 1rem 2rem !important;
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        border-radius: 12px !important;
         cursor: pointer;
-        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        letter-spacing: -0.01em;
+        transition: all 0.3s ease;
         margin-top: 1.5rem;
     }
     
     .stButton > button:hover {
-        background: #1a1a1a;
-        transform: translateY(-1px);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.12);
-    }
-    
-    .stButton > button:active {
-        transform: translateY(0);
+        background: #2dd4bf !important;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(94, 234, 212, 0.3);
     }
     
     /* Download buttons */
     .stDownloadButton > button {
-        background: white;
-        color: #0a0a0a;
-        border: 1.5px solid #e0e0e0;
-        font-weight: 600;
-        padding: 0.875rem 2rem;
-        border-radius: 12px;
-        transition: all 0.25s ease;
+        background: #22c55e !important;
+        color: white !important;
+        border: none !important;
+        font-weight: 600 !important;
+        padding: 0.875rem 2rem !important;
+        border-radius: 12px !important;
+        transition: all 0.3s ease;
+        width: 100%;
     }
     
     .stDownloadButton > button:hover {
-        background: #fafafa;
-        border-color: #0a0a0a;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        background: #16a34a !important;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
     }
     
     /* Metrics */
     [data-testid="stMetricValue"] {
         font-size: 2rem;
         font-weight: 700;
-        color: #0a0a0a;
+        color: #5eead4;
     }
     
     [data-testid="stMetricLabel"] {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         font-weight: 600;
-        color: #666;
+        color: #9ca3af;
         text-transform: uppercase;
         letter-spacing: 0.05em;
     }
     
     .stMetric {
-        background: white;
+        background: #1a1f26;
         padding: 1.25rem;
-        border-radius: 16px;
-        border: 1px solid #f0f0f0;
+        border-radius: 14px;
+        border: 1px solid #2a2e35;
     }
     
     /* Progress bar */
     .stProgress > div > div {
-        background: #0a0a0a;
+        background: linear-gradient(90deg, #5eead4 0%, #2dd4bf 100%);
         border-radius: 10px;
-        height: 6px;
+        height: 8px;
     }
     
     .stProgress > div {
-        background: #f0f0f0;
+        background: #2a2e35;
         border-radius: 10px;
-    }
-    
-    /* Dataframe */
-    [data-testid="stDataFrame"] {
-        border-radius: 16px;
-        border: 1px solid #f0f0f0;
-    }
-    
-    /* Alerts */
-    .stAlert {
-        border-radius: 14px;
-        border: none;
-        padding: 1rem 1.25rem;
-        background: white;
-        border: 1px solid #f0f0f0;
     }
     
     /* Info section */
     .info-section {
-        background: white;
-        border-radius: 20px;
+        background: #f5f5f5;
+        border-radius: 24px;
         padding: 2rem;
         margin-top: 2rem;
-        border: 1px solid #f0f0f0;
     }
     
     .info-title {
-        font-size: 0.875rem;
+        font-size: 1rem;
         font-weight: 700;
-        color: #0a0a0a;
-        margin-bottom: 1rem;
+        color: #1a1a1a;
+        margin-bottom: 1.25rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
     }
     
     .match-types {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
         gap: 1rem;
-        margin-top: 1rem;
     }
     
     .match-type {
         background: #fafafa;
-        padding: 1rem;
-        border-radius: 12px;
+        padding: 1.5rem;
+        border-radius: 16px;
         text-align: center;
-        border: 1px solid #f0f0f0;
+        border: 1px solid #e5e5e5;
     }
     
     .match-type-name {
-        font-size: 0.75rem;
+        font-size: 0.95rem;
         font-weight: 700;
-        color: #666;
+        color: #1a1a1a;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.5rem;
     }
     
     .match-type-desc {
-        font-size: 0.8rem;
-        color: #999;
-        line-height: 1.4;
+        font-size: 0.875rem;
+        color: #737373;
+        line-height: 1.5;
+    }
+    
+    /* Alerts */
+    .stAlert {
+        border-radius: 12px;
+        background: #1a1f26;
+        border: 1px solid #2a2e35;
+        color: #e0e0e0;
+    }
+    
+    .stSuccess {
+        background: #14532d !important;
+        border-color: #16a34a !important;
+        color: #bbf7d0 !important;
+    }
+    
+    .stWarning {
+        background: #431407 !important;
+        border-color: #ea580c !important;
+        color: #fed7aa !important;
     }
     
     /* Expander */
     .streamlit-expanderHeader {
-        background: white;
-        border-radius: 14px;
+        background: #1a1f26;
+        border-radius: 12px;
         font-weight: 600;
-        color: #0a0a0a;
-        border: 1px solid #f0f0f0;
+        color: #e0e0e0;
+        border: 1px solid #2a2e35;
         padding: 1rem 1.25rem;
     }
     
     .streamlit-expanderHeader:hover {
-        background: #fafafa;
-        border-color: #e0e0e0;
+        background: #2a2e35;
+        border-color: #4a5568;
     }
     
-    /* Mobile */
+    /* Dataframe */
+    [data-testid="stDataFrame"] {
+        border-radius: 12px;
+        border: 1px solid #2a2e35;
+    }
+    
+    /* Text color fixes */
+    p, span, div {
+        color: #e0e0e0;
+    }
+    
+    /* Mobile responsive */
     @media (max-width: 768px) {
         .block-container {
-            padding: 2rem 1rem;
+            padding: 1.5rem 1rem;
         }
         
         .premium-header {
-            font-size: 2rem;
-            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            margin: 1.5rem 0 2rem 0;
         }
         
-        .upload-container {
+        .upload-card {
             padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card-label {
+            font-size: 1rem;
+        }
+        
+        [data-testid="stFileUploader"] {
+            padding: 2rem 1.5rem;
         }
         
         .info-section {
             padding: 1.5rem;
         }
         
-        .match-types {
-            grid-template-columns: 1fr;
+        .match-type {
+            padding: 1.25rem;
         }
     }
     </style>
@@ -453,16 +520,14 @@ def process_matching(df1, df2, match_col1, match_col2, return_columns, progress_
 def main():
     st.markdown('<h1 class="premium-header">Match Data</h1>', unsafe_allow_html=True)
     
-    st.markdown('<div class="upload-container">', unsafe_allow_html=True)
+    st.markdown('<div class="upload-card">', unsafe_allow_html=True)
+    st.markdown('<span class="card-label">Database File</span>', unsafe_allow_html=True)
+    file1 = st.file_uploader("db", type=['xlsx', 'xls'], label_visibility="collapsed", key="file1")
+    st.markdown('</div>', unsafe_allow_html=True)
     
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        file1 = st.file_uploader("Database File", type=['xlsx', 'xls'], label_visibility="visible")
-    
-    with col2:
-        file2 = st.file_uploader("Input File", type=['xlsx', 'xls'], label_visibility="visible")
-    
+    st.markdown('<div class="upload-card">', unsafe_allow_html=True)
+    st.markdown('<span class="card-label">Input File</span>', unsafe_allow_html=True)
+    file2 = st.file_uploader("input", type=['xlsx', 'xls'], label_visibility="collapsed", key="file2")
     st.markdown('</div>', unsafe_allow_html=True)
     
     if file1 and file2:
@@ -542,7 +607,7 @@ def main():
     else:
         st.markdown("""
         <div class="info-section">
-            <div class="info-title">How it works</div>
+            <div class="info-title">How It Works</div>
             <div class="match-types">
                 <div class="match-type">
                     <div class="match-type-name">Exact</div>
