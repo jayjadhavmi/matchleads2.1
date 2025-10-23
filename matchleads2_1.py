@@ -28,7 +28,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Premium CSS
+# Premium CSS - Dark theme compatible
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
@@ -38,11 +38,11 @@ st.markdown("""
     }
     
     .main {
-        background: #fafafa;
+        background: #2d3748;
     }
     
     .block-container {
-        max-width: 680px;
+        max-width: 720px;
         padding: 3rem 1rem 2rem 1rem;
     }
     
@@ -51,12 +51,23 @@ st.markdown("""
     
     /* Header */
     .premium-header {
-        font-size: 2.75rem;
-        font-weight: 800;
-        color: #0a0a0a;
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #4fd1c5 0%, #63b3ed 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         text-align: center;
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+    }
+    
+    .subtitle {
+        text-align: center;
+        color: #a0aec0;
+        font-size: 1rem;
         margin-bottom: 3rem;
-        letter-spacing: -0.03em;
+        font-weight: 400;
     }
     
     /* Upload section */
