@@ -84,14 +84,14 @@ st.markdown("""
     /* File uploader unified background */
     [data-testid="stFileUploader"] {
         background: white !important;
-        border: 2px dashed #cbd5e1;
+        border: 2px dashed #22d3ee;
         border-radius: 16px;
         padding: 2.5rem 2rem;
         transition: all 0.3s ease;
     }
     
     [data-testid="stFileUploader"]:hover {
-        border-color: #22d3ee;
+        border-color: #06b6d4;
         background: #f0fdff !important;
     }
     
@@ -110,7 +110,7 @@ st.markdown("""
     }
     
     .upload-text {
-        color: #64748b;
+        color: #64748b !important;
         font-size: 1rem;
         font-weight: 500;
         text-align: center;
@@ -137,6 +137,25 @@ st.markdown("""
         box-shadow: 0 6px 20px rgba(34, 211, 238, 0.4);
     }
     
+    /* File uploader text color fix - CRITICAL */
+    [data-testid="stFileUploader"] p,
+    [data-testid="stFileUploader"] span,
+    [data-testid="stFileUploader"] div,
+    [data-testid="stFileUploader"] small {
+        color: #1e3a5f !important;
+        background: transparent !important;
+    }
+    
+    /* File uploader inner content area */
+    [data-testid="stFileUploader"] [data-testid="stMarkdownContainer"] {
+        color: #1e3a5f !important;
+    }
+    
+    /* Drag and drop text */
+    [data-testid="stFileUploader"] [role="button"] {
+        color: #1e3a5f !important;
+    }
+    
     /* Select boxes */
     .stSelectbox, .stMultiSelect {
         margin-bottom: 1rem;
@@ -145,7 +164,7 @@ st.markdown("""
     .stSelectbox label, .stMultiSelect label {
         font-size: 0.95rem;
         font-weight: 600;
-        color: #1e3a5f;
+        color: #1e3a5f !important;
         margin-bottom: 0.5rem;
     }
     
@@ -258,7 +277,7 @@ st.markdown("""
     .info-title {
         font-size: 0.95rem;
         font-weight: 800;
-        color: #1e3a5f;
+        color: #1e3a5f !important;
         margin-bottom: 1.25rem;
         text-transform: uppercase;
         letter-spacing: 0.08em;
@@ -287,7 +306,7 @@ st.markdown("""
     .match-type-name {
         font-size: 0.95rem;
         font-weight: 800;
-        color: #1e3a5f;
+        color: #1e3a5f !important;
         text-transform: uppercase;
         letter-spacing: 0.08em;
         margin-bottom: 0.5rem;
@@ -295,7 +314,7 @@ st.markdown("""
     
     .match-type-desc {
         font-size: 0.875rem;
-        color: #64748b;
+        color: #64748b !important;
         line-height: 1.5;
         font-weight: 500;
     }
@@ -305,7 +324,7 @@ st.markdown("""
         border-radius: 14px;
         background: white;
         border: 2px solid #e2e8f0;
-        color: #1e3a5f;
+        color: #1e3a5f !important;
         font-weight: 600;
     }
     
@@ -326,7 +345,7 @@ st.markdown("""
         background: white;
         border-radius: 14px;
         font-weight: 700;
-        color: #1e3a5f;
+        color: #1e3a5f !important;
         border: 2px solid #e2e8f0;
         padding: 1rem 1.25rem;
     }
@@ -341,6 +360,20 @@ st.markdown("""
         border-radius: 14px;
         border: 2px solid #e2e8f0;
         overflow: hidden;
+    }
+    
+    /* Force all text colors */
+    h1, h2, h3, h4, h5, h6 {
+        color: #1e3a5f !important;
+    }
+    
+    p, span, div, label {
+        color: #1e3a5f !important;
+    }
+    
+    /* Override Streamlit's default dark mode colors */
+    .stMarkdown, .stText {
+        color: #1e3a5f !important;
     }
     
     /* Spinner */
