@@ -58,7 +58,7 @@ st.markdown("""
     .premium-header {
         font-size: 3rem;
         font-weight: 800;
-        color: #1e3a5f;
+        color: #1e3a5f !important;
         text-align: center;
         margin: 0 0 2.5rem 0;
         letter-spacing: -0.02em;
@@ -76,7 +76,7 @@ st.markdown("""
     .section-title {
         font-size: 1.125rem;
         font-weight: 700;
-        color: #1e3a5f;
+        color: #1e3a5f !important;
         margin-bottom: 1.25rem;
         display: block;
     }
