@@ -14,45 +14,207 @@ except ImportError:
         HAVE_RAPIDFUZZ = True
     except ImportError:
         HAVE_RAPIDFUZZ = False
-        st.warning("⚠️ fuzzywuzzy/rapidfuzz not installed. Fuzzy matching disabled.")
 
 try:
     from sentence_transformers import SentenceTransformer, util
     HAVE_TRANSFORMERS = True
 except ImportError:
     HAVE_TRANSFORMERS = False
-    st.warning("⚠️ sentence-transformers not installed. AI matching disabled.")
 
 # Page configuration
 st.set_page_config(
-    page_title="Domain Matcher Tool",
-    page_icon="🔍",
-    layout="wide"
+    page_title="Match Leads",
+    page_icon="🎯",
+    layout="centered",
+    initial_sidebar_state="collapsed"
 )
 
-# Custom CSS
+# Custom CSS - Modern, clean, mobile-friendly design
 st.markdown("""
     <style>
+    /* Import Google Font */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    /* Global Styles */
+    * {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    /* Main container */
+    .main {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        padding: 1rem;
+    }
+    
+    .block-container {
+        max-width: 900px;
+        padding: 2rem 1rem;
+    }
+    
+    /* Header */
     .main-header {
-        font-size: 2.5rem;
-        font-weight: bold;
-        color: #1f77b4;
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 700;
+        color: #1a202c;
         text-align: center;
-        margin-bottom: 2rem;
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.02em;
     }
-    .info-box {
-        background-color: #f0f8ff;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        border-left: 5px solid #1f77b4;
-        margin: 1rem 0;
+    
+    .subtitle {
+        text-align: center;
+        color: #64748b;
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+        margin-bottom: 2.5rem;
+        font-weight: 400;
     }
-    .success-box {
-        background-color: #d4edda;
+    
+    /* Card styling */
+    .upload-card, .config-card, .results-card {
+        background: white;
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        margin-bottom: 1.5rem;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #1a202c;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    /* File uploader styling */
+    .stFileUploader {
+        border: 2px dashed #cbd5e1;
+        border-radius: 12px;
+        padding: 1.5rem;
+        background: #f8fafc;
+        transition: all 0.3s ease;
+    }
+    
+    .stFileUploader:hover {
+        border-color: #94a3b8;
+        background: #f1f5f9;
+    }
+    
+    /* Button styling */
+    .stButton > button {
+        width: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 0.875rem 2rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(102, 126, 234, 0.25);
+        letter-spacing: 0.02em;
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(102, 126, 234, 0.35);
+    }
+    
+    .stButton > button:active {
+        transform: translateY(0);
+    }
+    
+    /* Download buttons */
+    .stDownloadButton > button {
+        background: white;
+        color: #667eea;
+        border: 2px solid #667eea;
+        font-weight: 600;
+    }
+    
+    .stDownloadButton > button:hover {
+        background: #667eea;
+        color: white;
+    }
+    
+    /* Select boxes */
+    .stSelectbox, .stMultiSelect {
+        border-radius: 8px;
+    }
+    
+    /* Metrics */
+    .stMetric {
+        background: white;
         padding: 1rem;
-        border-radius: 0.5rem;
-        border-left: 5px solid #28a745;
-        margin: 1rem 0;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        border: 1px solid #e2e8f0;
+    }
+    
+    .stMetric label {
+        color: #64748b;
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+    
+    .stMetric [data-testid="stMetricValue"] {
+        color: #1a202c;
+        font-size: 1.875rem;
+        font-weight: 700;
+    }
+    
+    /* Progress bar */
+    .stProgress > div > div {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        border-radius: 10px;
+    }
+    
+    /* Dataframe */
+    .stDataFrame {
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+    }
+    
+    /* Info/Success messages */
+    .stAlert {
+        border-radius: 12px;
+        border: none;
+        padding: 1rem 1.25rem;
+    }
+    
+    /* Expander */
+    .streamlit-expanderHeader {
+        background: #f8fafc;
+        border-radius: 8px;
+        font-weight: 500;
+    }
+    
+    /* Hide Streamlit branding */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+        .block-container {
+            padding: 1rem 0.5rem;
+        }
+        
+        .upload-card, .config-card, .results-card {
+            padding: 1.25rem;
+        }
+        
+        .main-header {
+            margin-bottom: 0.25rem;
+        }
+        
+        .subtitle {
+            margin-bottom: 1.5rem;
+        }
     }
     </style>
 """, unsafe_allow_html=True)
